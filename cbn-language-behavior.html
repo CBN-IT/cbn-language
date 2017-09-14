@@ -8,8 +8,7 @@
 	Cbn.facturi.languageBehavior = {
 		properties: {
 			selectedLanguage: {
-				type: String,
-				value: "en" 
+				type: String
 			}
 		},
 		observers: [
@@ -17,6 +16,7 @@
 		],
 		attached: function(){
 		 	this.listen(document,"cbn-changed-language","changedLanguage");   
+		 	this.selectedLanguage = "en";
 		},
 		changedLanguage: function(event){
 		    this.selectedLanguage = event.detail.selectedLanguage;   
@@ -25,7 +25,7 @@
 		    if(window["resources"] != undefined){
 				return window["resources"][language][name] != undefined ? window["resources"][language][name] : window["resources"][language]["en"];
 			} else {
-		        return ["resources"][name];
+				return this.resources[name];
 			}
 		}
 	};
