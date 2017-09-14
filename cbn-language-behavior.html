@@ -1,0 +1,32 @@
+<script>
+	if (window.Cbn === undefined) {
+		window.Cbn = {};
+	}
+	if (window.Cbn.facturi === undefined) {
+		Cbn.facturi = {};
+	}
+	Cbn.facturi.languageBehavior = {
+		properties: {
+			selectedLanguage: {
+				type: String,
+				value: "en" 
+			}
+		},
+		observers: [
+		    
+		],
+		attached: function(){
+		 	this.listen(document,"cbn-changed-language","changedLanguage");   
+		},
+		changedLanguage: function(event){
+		    this.selectedLanguage = event.detail.selectedLanguage;   
+		},
+		_computedLanguage: function(language,name){
+		    if(window["resources"] != undefined){
+				return window["resources"][language][name] != undefined ? window["resources"][language][name] : window["resources"][language]["en"];
+			} else {
+		        return ["resources"][name];
+			}
+		}
+	};
+</script>
