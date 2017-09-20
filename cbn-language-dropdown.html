@@ -7,201 +7,166 @@
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 
 <dom-module id="cbn-language-dropdown">
-	<style>
-		paper-icon-button {
-			--paper-icon-button: {
-				color: black !important;
-			}
-		}
+    <style>
+        paper-icon-button {
+            --paper-icon-button: {
+                color: black !important;
+            }
+        }
 
-		paper-item span {
-			padding-left: 5px;
-			font-weight: bold;
-		}
+        paper-item span {
+            padding-left: 5px;
+            font-weight: bold;
+        }
 
-		paper-menu-button {
-			padding: 4px;
-			--paper-menu-button-dropdown: {
-				margin-top: 48px;
-			}
-		}
-	</style>
-	<template>
-		<iron-ajax id="saveDefaultLanguage" url="/save/SaveDefaultLanguage" handle-as="json" last-response="{{listEntities}}" ></iron-ajax>
-		<paper-menu-button>
-			<paper-icon-button icon="flag:{{selectedLanguage}}" class="dropdown-trigger" alt="menu"></paper-icon-button>
-			<paper-listbox class="dropdown-content" attr-for-selected="label" selected="{{selectedLanguage}}">
-				<paper-item label="en">
-					<iron-icon icon="flag:en"></iron-icon>
-					<span>English</span>
-				</paper-item>
-				<paper-item label="ro">
-					<iron-icon icon="flag:ro"></iron-icon>
-					<span>Romanian</span>
-				</paper-item>
-				<!--<paper-item label="de">
-					<iron-icon icon="flag:de"></iron-icon>
-					<span>Germany</span>
-				</paper-item>-->
-			</paper-listbox>
-		</paper-menu-button>
-	</template>
+        paper-menu-button {
+            padding: 4px;
+            --paper-menu-button-dropdown: {
+                margin-top: 48px;
+            }
+        }
+    </style>
+    <template>
+        <iron-ajax id="saveDefaultLanguage" url="/save/SaveDefaultLanguage" handle-as="json"
+                   last-response="{{listEntities}}"></iron-ajax>
+        <paper-menu-button>
+            <paper-icon-button icon="flag:{{selectedLanguage}}" class="dropdown-trigger" alt="menu"></paper-icon-button>
+            <paper-listbox class="dropdown-content" attr-for-selected="label" selected="{{selectedLanguage}}">
+                <paper-item label="en">
+                    <iron-icon icon="flag:en"></iron-icon>
+                    <span>English</span>
+                </paper-item>
+                <paper-item label="ro">
+                    <iron-icon icon="flag:ro"></iron-icon>
+                    <span>Romanian</span>
+                </paper-item>
+                <!--<paper-item label="de">
+                    <iron-icon icon="flag:de"></iron-icon>
+                    <span>Germany</span>
+                </paper-item>-->
+            </paper-listbox>
+        </paper-menu-button>
+    </template>
 </dom-module>
 
 <script>
-	(function () {
-		Polymer({
+    (function () {
+        Polymer({
 
-			is: 'cbn-language-dropdown',
-			behaviors: [],
-			properties: {
-				namespace: {
-					type: String,
-					value: function(){
-						return window.namespace;
-					}
-				},
-				selectedLanguage: {
-					type: String,
-					value: function(){
-					    return window["selectedLanguage"] != "null" ? window["selectedLanguage"] : "en"
-					},
-					observer: "changedLanguage"
-				},
-				resources: {
-					type: Object,
-					value: {
-						"en": {
-							"test": "Test us",
-							"cells": "Cells",
-							"logs": "Logs",
-							"reports": "Reports",
-							"firm": "Firm",
-							"settings": "Settings",
-							"temperature": "Temperature",
-							"ventilation": "Ventilation",
-							"condens": "Condens",
-							"section": "Section",
-							"matrix": "Matrix",
-							"chart": "Chart",
-							"vent": "Vent",
-							"roofTemperature": "Roof temperature",
-							"roofHumidity": "Relative humidity",
-							"roofTemperatureInside": "Air temperature",
-							"commandError": "Command execution error",
-							"sedingCommand": "Sending command",
-							"commandSent": "Command successfully sent",
-							"verifyingStatus": "Verifying status",
-							"tempAlerts": "Temp alerts",
-							"sensor": "Sensor",
-							"wire": "Wire",
-							"color": "Color",
-							"delete": "Delete",
-							"call": "Call",
-							"save": "Save",
-							"variationAlert": "The parameters of temperature variation alert",
-							"hoursNr": "Hours nr.",
-							"variation": "Variation",
-							"intervalAlerts": "Interval alerts",
-							"intervalDataTransmission": "Interval data transmission",
-							"powerExhaust": "When dew point is reached, power ON the Exhaust system if available",
-							"powerVentilation": "When dew point is reached, power OFF the Ventilation system",
-							"airTemp": "Air temp",
-							"forecast": "Forecast",
-							"rain": "Rain",
-							"today": "Today",
-							"tomorrow": "Tomorrow",
-							"fillForm": "Complete the form",
-							"savedData": "The data have been saved",
-							"oneInterval": "Enter at least one interval",
-							"minValue": "Enter the minimum value at interval ",
-							"maxValue": "Enter the minimum value at interval ",
-							"cancel":"Cancel",
-							"send": "Send",
-							"help": "Help",
-							"message": "Message",
-                            "logout":"Logout",
-                            "edit": "Edit",
-							"messageHistory": "Message history",
-							"hideMessage": "Hide message"
-						},
-						"ro": {
-							"test": "Test ro",
-							"cells": "Celule",
-							"logs": "Loguri",
-							"reports": "Rapoarte",
-							"firm": "Firma",
-							"settings": "Setari",
-							"temperature": "Temperatura",
-							"ventilation": "Ventilare",
-							"condens": "Condens",
-							"section": "Sectiune",
-							"matrix": "Matrice",
-							"chart": "Grafic",
-							"vent": "Ventilator",
-							"roofTemperature": "Temperatura acoperis",
-							"roofHumidity": "Umiditate relativa",
-							"roofTemperatureInside": "Temperatura aer",
-							"commandError": "Eroare comanda",
-							"sedingCommand": "Trimitere comanda",
-							"commandSent": "Comanda trimisa",
-							"verifyingStatus": "Verificare status",
-							"tempAlerts": "Alerte temperaturi",
-							"sensor": "Senzor",
-							"wire": "Sufa",
-							"color": "Culoare",
-							"delete": "Sterge",
-							"call": "Apel",
-							"save": "Salveaza",
-							"variationAlert": "Parametrii pentru alertele de variatie a temperaturii",
-							"hoursNr": "Nr. ore",
-							"variation": "Variatie",
-							"intervalAlerts": "Interval alerte",
-							"intervalDataTransmission": "Interval transmitere date",
-							"powerExhaust": "Pornirea sitemului de evacuare cand este atins punctul de roua",
-							"powerVentilation": "Oprirea sistemului de ventilatie cand este atins punctul de roua",
-							"airTemp": "Temp aer",
-							"forecast": "Vreme",
-							"rain": "Ploaie",
-							"today": "Azi",
-							"tomorrow": "Maine",
-							"fillForm": "Completati parametrii formularului",
-							"savedData": "Datele au fost salvate",
-							"oneInterval": "Introduceti cel putin interval",
-							"minValue": "Introduceti valoarea minima la intervalul ",
-							"maxValue": "Introduceti valoarea maxima la intervalul ",
-							"cancel": "Anuleaza",
-							"send": "Trimite",
-							"help": "Ajutor",
-							"message": "Mesaj",
-                            "logout":"Delogare",
-                            "edit": "Editare",
-                            "messageHistory": "Istoric mesaje",
-                            "hideMessage": "Ascunde mesajul"
-						}
-					}
-				}
-			}, 
-			observers: [],
-			attached: function(){
-				window.resources = this.resources;
-			},
-			ready: function(){
-				this.async(function(){this.triggerChange()},1);  
-			},
-			triggerChange: function(){
-				this.fire("cbn-changed-language",{
-					"selectedLanguage": this.selectedLanguage
-				});
-			},
-			changedLanguage: function () {
-			    this.triggerChange();
-				this.$.saveDefaultLanguage.params = {
-				    "namespace": this.namespace,
-					"selectedLanguage": this.selectedLanguage
-				};
-				this.$.saveDefaultLanguage.generateRequest();
-			}
-		})
-	})();
+            is: 'cbn-language-dropdown',
+            behaviors: [],
+            properties: {
+                namespace: {
+                    type: String,
+                    value: function () {
+                        return window.namespace;
+                    }
+                },
+                selectedLanguage: {
+                    type: String,
+                    value: function () {
+                        return window["selectedLanguage"] != "null" ? window["selectedLanguage"] : "en"
+                    },
+                    observer: "changedLanguage"
+                },
+                resources: {
+                    type: Object,
+                    value: {
+                        "test": {"en": "Test us", "ro": "Test ro"},
+                        "cells": {"en": "Cells", "ro": "Celule"},
+                        "logs": {"en": "Logs", "ro": "Loguri"},
+                        "reports": {"en": "Reports", "ro": "Rapoarte"},
+                        "firm": {"en": "Firm", "ro": "Firma"},
+                        "settings": {"en": "Settings", "ro": "Setari"},
+                        "temperature": {"en": "Temperature", "ro": "Temperatura"},
+                        "ventilation": {"en": "Ventilation", "ro": "Ventilare"},
+                        "condens": {"en": "Condens", "ro": "Condens"},
+                        "section": {"en": "Section", "ro": "Sectiune"},
+                        "matrix": {"en": "Matrix", "ro": "Matrice"},
+                        "chart": {"en": "Chart", "ro": "Grafic"},
+                        "vent": {"en": "Vent", "ro": "Ventilator"},
+                        "roofTemperature": {"en": "Roof temperature", "ro": "Temperatura acoperis"},
+                        "roofHumidity": {"en": "Relative humidity", "ro": "Umiditate relativa"},
+                        "roofTemperatureInside": {"en": "Air temperature", "ro": "Temperatura aer"},
+                        "commandError": {"en": "Command execution error", "ro": "Eroare comanda"},
+                        "sedingCommand": {"en": "Sending command", "ro": "Trimitere comanda"},
+                        "commandSent": {"en": "Command successfully sent", "ro": "Comanda trimisa"},
+                        "verifyingStatus": {"en": "Verifying status", "ro": "Verificare status"},
+                        "tempAlerts": {"en": "Temp alerts", "ro": "Alerte temperaturi"},
+                        "sensor": {"en": "Sensor", "ro": "Senzor"},
+                        "wire": {"en": "Wire", "ro": "Sufa"},
+                        "color": {"en": "Color", "ro": "Culoare"},
+                        "delete": {"en": "Delete", "ro": "Sterge"},
+                        "call": {"en": "Call", "ro": "Apel"},
+                        "save": {"en": "Save", "ro": "Salveaza"},
+                        "variationAlert": {
+                            "en": "The parameters of temperature variation alert",
+                            "ro": "Parametrii pentru alertele de variatie a temperaturii"
+                        },
+                        "hoursNr": {"en": "Hours nr.", "ro": "Nr. ore"},
+                        "variation": {"en": "Variation", "ro": "Variatie"},
+                        "intervalAlerts": {"en": "Interval alerts", "ro": "Interval alerte"},
+                        "intervalDataTransmission": {
+                            "en": "Interval data transmission",
+                            "ro": "Interval transmitere date"
+                        },
+                        "powerExhaust": {
+                            "en": "When dew point is reached, power ON the Exhaust system if available",
+                            "ro": "Pornirea sitemului de evacuare cand este atins punctul de roua"
+                        },
+                        "powerVentilation": {
+                            "en": "When dew point is reached, power OFF the Ventilation system",
+                            "ro": "Oprirea sistemului de ventilatie cand este atins punctul de roua"
+                        },
+                        "airTemp": {"en": "Air temp", "ro": "Temp aer"},
+                        "forecast": {"en": "Forecast", "ro": "Vreme"},
+                        "rain": {"en": "Rain", "ro": "Ploaie"},
+                        "today": {"en": "Today", "ro": "Azi"},
+                        "tomorrow": {"en": "Tomorrow", "ro": "Maine"},
+                        "fillForm": {"en": "Complete the form", "ro": "Completati parametrii formularului"},
+                        "savedData": {"en": "The data have been saved", "ro": "Datele au fost salvate"},
+                        "oneInterval": {"en": "Enter at least one interval", "ro": "Introduceti cel putin interval"},
+                        "minValue": {
+                            "en": "Enter the minimum value at interval ",
+                            "ro": "Introduceti valoarea minima la intervalul "
+                        },
+                        "maxValue": {
+                            "en": "Enter the minimum value at interval ",
+                            "ro": "Introduceti valoarea maxima la intervalul "
+                        },
+                        "cancel": {"en": "Cancel", "ro": "Anuleaza"},
+                        "send": {"en": "Send", "ro": "Trimite"},
+                        "help": {"en": "Help", "ro": "Ajutor"},
+                        "message": {"en": "Message", "ro": "Mesaj"},
+                        "logout": {"en": "Logout", "ro": "Delogare"},
+                        "edit": {"en": "Edit", "ro": "Editare"},
+                        "messageHistory": {"en": "Message history", "ro": "Istoric mesaje"},
+                        "hideMessage": {"en": "Hide message", "ro": "Ascunde mesajul"}
+                    }
+                }
+            },
+            observers: [],
+            attached: function () {
+                window.resources = this.resources;
+            },
+            ready: function () {
+                this.async(function () {
+                    this.triggerChange()
+                }, 1);
+            },
+            triggerChange: function () {
+                this.fire("cbn-changed-language", {
+                    "selectedLanguage": this.selectedLanguage
+                });
+            },
+            changedLanguage: function () {
+                this.triggerChange();
+                this.$.saveDefaultLanguage.params = {
+                    "namespace": this.namespace,
+                    "selectedLanguage": this.selectedLanguage
+                };
+                this.$.saveDefaultLanguage.generateRequest();
+            }
+        })
+    })();
 </script>

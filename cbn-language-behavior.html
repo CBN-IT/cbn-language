@@ -23,7 +23,7 @@
 		},
 		_computedLanguage: function(language,name){
 		    if(window["resources"] != undefined){
-				return window["resources"][language][name] != undefined ? window["resources"][language][name] : window["resources"][language]["en"];
+				return window["resources"][name][language] != undefined ? window["resources"][name][language] : window["resources"][name]["en"];
 			} else {
 				return this.resources[name];
 			}
