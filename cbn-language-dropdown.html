@@ -40,10 +40,10 @@
                     <iron-icon icon="flag:ro"></iron-icon>
                     <span>Romanian</span>
                 </paper-item>
-                <!--<paper-item label="de">
+                <paper-item label="de">
                     <iron-icon icon="flag:de"></iron-icon>
                     <span>Germany</span>
-                </paper-item>-->
+                </paper-item>
             </paper-listbox>
         </paper-menu-button>
     </template>
@@ -71,83 +71,12 @@
                 },
                 resources: {
                     type: Object,
-                    value: {
-                        "test": {"en": "Test us", "ro": "Test ro"},
-                        "cells": {"en": "Cells", "ro": "Celule"},
-                        "logs": {"en": "Logs", "ro": "Loguri"},
-                        "reports": {"en": "Reports", "ro": "Rapoarte"},
-                        "firm": {"en": "Firm", "ro": "Firma"},
-                        "settings": {"en": "Settings", "ro": "Setari"},
-                        "temperature": {"en": "Temperature", "ro": "Temperatura"},
-                        "ventilation": {"en": "Ventilation", "ro": "Ventilare"},
-                        "condens": {"en": "Condens", "ro": "Condens"},
-                        "section": {"en": "Section", "ro": "Sectiune"},
-                        "matrix": {"en": "Matrix", "ro": "Matrice"},
-                        "chart": {"en": "Chart", "ro": "Grafic"},
-                        "vent": {"en": "Vent", "ro": "Ventilator"},
-                        "roofTemperature": {"en": "Roof temperature", "ro": "Temperatura acoperis"},
-                        "roofHumidity": {"en": "Relative humidity", "ro": "Umiditate relativa"},
-                        "roofTemperatureInside": {"en": "Air temperature", "ro": "Temperatura aer"},
-                        "commandError": {"en": "Command execution error", "ro": "Eroare comanda"},
-                        "sedingCommand": {"en": "Sending command", "ro": "Trimitere comanda"},
-                        "commandSent": {"en": "Command successfully sent", "ro": "Comanda trimisa"},
-                        "verifyingStatus": {"en": "Verifying status", "ro": "Verificare status"},
-                        "tempAlerts": {"en": "Temp alerts", "ro": "Alerte temperaturi"},
-                        "sensor": {"en": "Sensor", "ro": "Senzor"},
-                        "wire": {"en": "Wire", "ro": "Sufa"},
-                        "color": {"en": "Color", "ro": "Culoare"},
-                        "delete": {"en": "Delete", "ro": "Sterge"},
-                        "call": {"en": "Call", "ro": "Apel"},
-                        "save": {"en": "Save", "ro": "Salveaza"},
-                        "variationAlert": {
-                            "en": "The parameters of temperature variation alert",
-                            "ro": "Parametrii pentru alertele de variatie a temperaturii"
-                        },
-                        "hoursNr": {"en": "Hours nr.", "ro": "Nr. ore"},
-                        "variation": {"en": "Variation", "ro": "Variatie"},
-                        "intervalAlerts": {"en": "Interval alerts", "ro": "Interval alerte"},
-                        "intervalDataTransmission": {
-                            "en": "Interval data transmission",
-                            "ro": "Interval transmitere date"
-                        },
-                        "powerExhaust": {
-                            "en": "When dew point is reached, power ON the Exhaust system if available",
-                            "ro": "Pornirea sitemului de evacuare cand este atins punctul de roua"
-                        },
-                        "powerVentilation": {
-                            "en": "When dew point is reached, power OFF the Ventilation system",
-                            "ro": "Oprirea sistemului de ventilatie cand este atins punctul de roua"
-                        },
-                        "airTemp": {"en": "Air temp", "ro": "Temp aer"},
-                        "forecast": {"en": "Forecast", "ro": "Vreme"},
-                        "rain": {"en": "Rain", "ro": "Ploaie"},
-                        "today": {"en": "Today", "ro": "Azi"},
-                        "tomorrow": {"en": "Tomorrow", "ro": "Maine"},
-                        "fillForm": {"en": "Complete the form", "ro": "Completati parametrii formularului"},
-                        "savedData": {"en": "The data have been saved", "ro": "Datele au fost salvate"},
-                        "oneInterval": {"en": "Enter at least one interval", "ro": "Introduceti cel putin interval"},
-                        "minValue": {
-                            "en": "Enter the minimum value at interval ",
-                            "ro": "Introduceti valoarea minima la intervalul "
-                        },
-                        "maxValue": {
-                            "en": "Enter the minimum value at interval ",
-                            "ro": "Introduceti valoarea maxima la intervalul "
-                        },
-                        "cancel": {"en": "Cancel", "ro": "Anuleaza"},
-                        "send": {"en": "Send", "ro": "Trimite"},
-                        "help": {"en": "Help", "ro": "Ajutor"},
-                        "message": {"en": "Message", "ro": "Mesaj"},
-                        "logout": {"en": "Logout", "ro": "Delogare"},
-                        "edit": {"en": "Edit", "ro": "Editare"},
-                        "messageHistory": {"en": "Message history", "ro": "Istoric mesaje"},
-                        "hideMessage": {"en": "Hide message", "ro": "Ascunde mesajul"}
-                    }
+                    value: {}
                 }
             },
             observers: [],
             attached: function () {
-                window.resources = this.resources;
+//                window.resources = this.resources;
             },
             ready: function () {
                 this.async(function () {
@@ -155,9 +84,13 @@
                 }, 1);
             },
             triggerChange: function () {
+//
                 this.fire("cbn-changed-language", {
                     "selectedLanguage": this.selectedLanguage
                 });
+
+
+
             },
             changedLanguage: function () {
                 this.triggerChange();
