@@ -1,0 +1,100 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icons/editor-icons.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="flag-icons.html">
+
+<dom-module id="cbn-language">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+            paper-icon-button {
+                --paper-icon-button: {
+                    color: black !important;
+                }
+            }
+
+            paper-item span {
+                padding-left: 5px;
+                font-weight: bold;
+            }
+
+            paper-menu-button {
+                padding: 4px;
+                --paper-menu-button-dropdown: {
+                    margin-top: 48px;
+                }
+            }
+        </style>
+        <paper-menu-button no-animations>
+            <paper-icon-button icon="flag:{{selectedLanguage}}" slot="dropdown-trigger" alt="menu"></paper-icon-button>
+            <paper-listbox slot="dropdown-content" attr-for-selected="label" selected="{{selectedLanguage}}">
+                <paper-item label="en">
+                    <iron-icon icon="flag:en"></iron-icon>
+                    <span>English</span>
+                </paper-item>
+                <paper-item label="ro">
+                    <iron-icon icon="flag:ro"></iron-icon>
+                    <span>Romanian</span>
+                </paper-item>
+                <paper-item label="de">
+                    <iron-icon icon="flag:de"></iron-icon>
+                    <span>Germany</span>
+                </paper-item>
+            </paper-listbox>
+        </paper-menu-button>
+
+    </template>
+
+    <script>
+        /**
+         * `cbn-language`
+         * Internationalization
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class CbnLanguage extends Polymer.Element {
+            static get is() {
+                return 'cbn-language';
+            }
+
+            static get properties() {
+                return {
+                    namespace: {
+                        type: String,
+                        value: function () {
+                            return window.namespace;
+                        }
+                    },
+                    selectedLanguage: {
+                        type: String,
+                        value: function () {
+                            return window["selectedLanguage"] != "null" ? window["selectedLanguage"] : "en"
+                        },
+                        observer: "changedLanguage"
+                    },
+                    resources: {
+                        type: Object,
+                        value: {}
+                    }
+                };
+            }
+            changedLanguage(newValue, oldValue){
+                if(oldValue != undefined){
+                    console.log(arguments);
+                    location.replace(location.origin + "/?namespace=" + this.namespace + "&language=" + this.selectedLanguage);
+                }
+            }
+        }
+
+        window.customElements.define(CbnLanguage.is, CbnLanguage);
+    </script>
+</dom-module>
