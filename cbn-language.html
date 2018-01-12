@@ -17,8 +17,26 @@
                     color: black !important;
                 }
             }
+            .language-option{
+                --paper-item: {
+                    min-height:30px;
+                    border-top: 1px solid #cecece;
+                    color: black;
+                    padding:0 15px;
+                }
+            }
 
-            paper-item span {
+            .language-option.iron-selected{
+                color: white;
+                background-color: var(--selected-menu-color);
+            }
+
+            .language-option:hover{
+                cursor: pointer;
+                color: white;
+                background-color: var(--selected-menu-color);
+            }
+            .language-option span {
                 padding-left: 5px;
                 font-weight: bold;
             }
@@ -33,15 +51,15 @@
         <paper-menu-button no-animations>
             <paper-icon-button icon="flag:{{selectedLanguage}}" slot="dropdown-trigger" alt="menu"></paper-icon-button>
             <paper-listbox slot="dropdown-content" attr-for-selected="label" selected="{{selectedLanguage}}">
-                <paper-item label="en">
+                <paper-item label="en" class="language-option">
                     <iron-icon icon="flag:en"></iron-icon>
                     <span>English</span>
                 </paper-item>
-                <paper-item label="ro">
+                <paper-item label="ro" class="language-option">
                     <iron-icon icon="flag:ro"></iron-icon>
                     <span>Romanian</span>
                 </paper-item>
-                <paper-item label="de">
+                <paper-item label="de" class="language-option">
                     <iron-icon icon="flag:de"></iron-icon>
                     <span>Germany</span>
                 </paper-item>
@@ -78,10 +96,6 @@
                             return window["selectedLanguage"] != "null" ? window["selectedLanguage"] : "en"
                         },
                         observer: "changedLanguage"
-                    },
-                    resources: {
-                        type: Object,
-                        value: {}
                     }
                 };
             }
