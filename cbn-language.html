@@ -17,6 +17,9 @@
                     color: black !important;
                 }
             }
+            paper-menu-button>paper-listbox{
+                padding: 0;
+            }
             .language-option{
                 --paper-item: {
                     min-height:30px;
@@ -101,7 +104,6 @@
             }
             changedLanguage(newValue, oldValue){
                 if(oldValue != undefined){
-                    console.log(arguments);
                     location.replace(location.origin + "/?namespace=" + this.namespace + "&language=" + this.selectedLanguage);
                 }
             }
