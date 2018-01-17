@@ -5,10 +5,9 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-menu-button": "PolymerElements/paper-menu-button#^2.0.0",
-    "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
-    "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
-    "paper-item": "PolymerElements/paper-item#^2.0.0",
-    "iron-icon": "PolymerElements/iron-icon#^2.0.0"
+    "iron-icon": "PolymerElements/iron-icon#^2.0.0",
+    "iron-selector": "PolymerElements/iron-selector#^2.0.0",
+    "cbn-btn-styles": "CBN-IT/cbn-btn-styles#polymer2.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
