@@ -3,7 +3,6 @@
 <link rel="import" href="../paper-menu-button/paper-menu-button.html">
 <link rel="import" href="../iron-selector/iron-selector.html">
 <link rel="import" href="../cbn-btn-styles/cbn-btn-styles.html">
-<link rel="import" href="../cbn-icons/cbn-icons.html">
 <link rel="import" href="flag-icons.html">
 
 <dom-module id="cbn-language">
@@ -58,10 +57,6 @@
                     <iron-icon icon="flag:ro"></iron-icon>
                     <div>Romanian</div>
                 </div>
-                <div label="de" class="language-option">
-                    <iron-icon icon="flag:de"></iron-icon>
-                    <div>Germany</div>
-                </div>
             </iron-selector>
         </paper-menu-button>
 
@@ -100,7 +95,7 @@
             }
             changedLanguage(newValue, oldValue){
                 if(oldValue != undefined){
-                    location.replace(location.origin + "/?namespace=" + this.namespace + "&language=" + this.selectedLanguage);
+                    location.replace(location.protocol + '//' + location.host + location.pathname + "/?namespace=" + this.namespace + "&language=" + this.selectedLanguage);
                 }
             }
         }
