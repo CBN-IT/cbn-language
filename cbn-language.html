@@ -45,6 +45,8 @@
                 }
             }
             [slot="dropdown-trigger"]{
+                padding: 8px;
+                height: auto;
                 @apply --dropdown-button;
             }
             [slot="dropdown-trigger"]:hover{
@@ -55,7 +57,7 @@
             }
         </style>
         <paper-menu-button no-animations>
-            <button big="{{big}}" slot="dropdown-trigger" class="icon-btn big-btn ripple btn-trigger" alt="menu">
+            <button big="{{big}}" slot="dropdown-trigger" class="icon-btn ripple btn-trigger" alt="menu">
                 <iron-icon icon="flag:{{selectedLanguage}}"></iron-icon>
                 <span hidden="{{!displayLabel}}">{{selectedLabel}}</span>
             </button>
