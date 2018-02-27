@@ -41,22 +41,31 @@
                 padding: 4px;
                 --paper-menu-button-dropdown: {
                     margin-top: 48px;
+                    margin-left: 4px;
                 }
+            }
+            [slot="dropdown-trigger"]{
+                @apply --dropdown-button;
+            }
+            [slot="dropdown-trigger"]:hover{
+                @apply --dropdown-button-hover;
+            }
+            [hidden]{
+                display: none;
             }
         </style>
         <paper-menu-button no-animations>
-            <button slot="dropdown-trigger" class="icon-btn big-btn ripple btn-trigger" alt="menu">
+            <button big="{{big}}" slot="dropdown-trigger" class="icon-btn big-btn ripple btn-trigger" alt="menu">
                 <iron-icon icon="flag:{{selectedLanguage}}"></iron-icon>
+                <span hidden="{{!displayLabel}}">{{selectedLabel}}</span>
             </button>
-            <iron-selector slot="dropdown-content" attr-for-selected="label" selected="{{selectedLanguage}}">
-                <div label="en" class="language-option">
-                    <iron-icon icon="flag:en"></iron-icon>
-                    <div>English</div>
-                </div>
-                <div label="ro" class="language-option">
-                    <iron-icon icon="flag:ro"></iron-icon>
-                    <div>Romanian</div>
-                </div>
+            <iron-selector slot="dropdown-content" attr-for-selected="name" selected="{{selectedLanguage}}" id="selector">
+                <template is="dom-repeat" items="{{languages}}">
+                    <div name="{{item.name}}" class="language-option">
+                        <iron-icon icon="flag:{{item.name}}"></iron-icon>
+                        <div>{{item.label}}</div>
+                    </div>
+                </template>
             </iron-selector>
         </paper-menu-button>
 
@@ -89,13 +98,41 @@
                         value: function () {
                             return window["selectedLanguage"] != "null" ? window["selectedLanguage"] : "en"
                         },
-                        observer: "changedLanguage"
+                        observer: "changedLanguage",
+                        notify: true
+                    },
+                    selectedLabel: {
+                        type: String
+                    },
+                    languages: {
+                        type: Array,
+                        value: [
+                            {
+                                "name": "en",
+                                "label": "English"
+                            },
+                            {
+                                "name": "ro",
+                                "label": "Romana"
+                            }
+                        ]
+                    },
+                    preventEvent: {
+                        type: Boolean,
+                        value: false
+                    },
+                    displayLabel: {
+                        type: Boolean,
+                        value: false
                     }
                 };
             }
             changedLanguage(newValue, oldValue){
-                if(oldValue != undefined){
-                    location.replace(location.protocol + '//' + location.host + location.pathname + "/?namespace=" + this.namespace + "&language=" + this.selectedLanguage);
+                setTimeout(function(){
+                    this.selectedLabel = this.languages[this.$.selector._valueToIndex(newValue)]["label"];
+                }.bind(this));
+                if(oldValue !== undefined && !this.preventEvent){
+                    location.replace(location.protocol + '//' + location.host + location.pathname + "?namespace=" + this.namespace + "&language=" + this.selectedLanguage);
                 }
             }
         }
