@@ -1,4 +1,5 @@
 # \<cbn-language\>
+flags are from https://github.com/lipis/flag-icon-css/tree/master/flags/1x1
 
 Internationalization
 
